@@ -1,0 +1,39 @@
+body {
+  display: flex;
+  margin: 0px;
+}
+
+.main-nav {
+  background-color: black;
+  width: 200px;
+  height: 100vh;
+}
+
+.main-nav header {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: 1px solid gray;
+
+}
+
+.main-nav .nav-links {
+  list-style: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.main-nav .nav-links a.nav-item {
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+  display: block;
+}
+
+.main-nav .nav-links a.nav-item:hover{
+  background-color: rgb(11, 96, 146);
+  display: block;
+}
