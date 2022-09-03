@@ -1,10 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Students List</title>
-  </head>
-  <body></body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Students List</title>
+    </head>
+    <body>
+        <nav>
+            <header>Módulo Acadêmico</header>
+            <ul>
+                <li><a href="#">Alunos</a></li>
+            </ul>
+        </nav>
+        <section>
+            <header>Consulta de Alunos</header>
+            <div class="content-page">
+                <form action="">
+                    <input type="text" id="searchInput" name="searchInput" />
+                    <button>Pesquisar</button>
+                </form>
+                <button>Cadastrar Aluno</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Registro Acadêmico</th>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>12345</td>
+                            <td>João Pedro</td>
+                            <td>123456-789</td>
+                            <td>
+                                <a href="#">Editar</a>
+                                <a href="#">Excluir</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </body>
 </html>
