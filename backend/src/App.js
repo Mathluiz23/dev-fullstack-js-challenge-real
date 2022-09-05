@@ -15,7 +15,10 @@ app.use(express.json());
 
 
 app.get("/students/list", (req, res) => {
-  res.send(database);
+  setTimeout(()=> {
+    res.send(database);
+  }, 2000);
+// after 2 seconds get a database, simulation bd request 
 })
 
 app.get("/students/find/:ra", (req, res) => {
@@ -23,7 +26,9 @@ app.get("/students/find/:ra", (req, res) => {
     return student.ra === req.params.ra;
   });
 
-  res.send(studentsFound);
+  setTimeout(() => {
+    res.send(studentsFound);
+  }, 2000)
 })
 
 app.listen(3000);
