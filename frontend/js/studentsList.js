@@ -1,6 +1,5 @@
-alert("Olá fui importado")
-
 $(document).ready(() => {
+
   fetchStudents();
 })
 
@@ -10,7 +9,6 @@ function fetchStudents() {
     return response.json()
   })
   .then((data) => {
-    console.log(data);
     const table = $("#studentsList tbody");
     console.log(table);
     data.map((student) => {
@@ -20,11 +18,13 @@ function fetchStudents() {
           <td>${student.nome}</td>
           <td>${student.cpf}</td>
           <td>
-            <a href="#">Editar</a>
+            <a href="studentsManager.html?ra=${student.ra}">Editar</a>
             <a href="#">Excluir</a>
           </td>
         </tr>
       `)
     })
+    $(".loader").hide("fast");
+    $(".content-page").show("slow");
   });
 }
