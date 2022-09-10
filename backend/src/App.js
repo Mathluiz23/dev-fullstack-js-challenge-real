@@ -19,7 +19,7 @@ app.get("/students/list", (req, res) => {
     res.send(database);
   }, 2000);
 // after 2 seconds get a database, simulation bd request 
-})
+});
 
 app.get("/students/find/:ra", (req, res) => {
   const studentsFound = database.find((student) => {
@@ -29,7 +29,12 @@ app.get("/students/find/:ra", (req, res) => {
   setTimeout(() => {
     res.send(studentsFound);
   }, 2000)
-})
+});
+
+app.delete("/students/delete/:ra", (req, res) => {
+  res.send({result: `O estudante #${req.params.ra} foi excluído com sucesso`});
+});
+
 
 app.listen(3000);
 console.log("Server is running...")
