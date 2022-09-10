@@ -9,12 +9,12 @@ function fetchStudentsManager() {
   console.log(ra);
 
   if(ra) {
-    fetch(`http://localhost:3001/students/find/${ra}`)
+    console.log(ra, 'NO IF')
+    fetch(`http://localhost:3000/students/find/${ra}`)
     .then((response) => {
       return response.json()
     })
     .then((data) => {
-      console.log(data.nome);
       const studentForm = $("#studentForm");
 
       studentForm.find("#name").val(data.nome);
