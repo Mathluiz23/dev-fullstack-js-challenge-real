@@ -1,32 +1,55 @@
 $(document).ready(() => {
-  fetchStudentsManager();
-})
+	fetchStudentsManager();
+	const urlSearch = new URLSearchParams(window.location.search);
+	const ra = urlSearch.get("ra");
 
-function fetchStudentsManager() {
-  const urlSearch = new URLSearchParams(window.location.search);
-  // console.log(urlSearch.get("ra"));
-  const ra = urlSearch.get("ra");
-  console.log(ra);
+	if (ra) {
+		fetchStudentsManager(ra);
+	} else {
+		$(".loader").hide("fast");
+		$(".content-page").show("slow");
+	}
 
-  if(ra) {
-    console.log(ra, 'NO IF')
-    fetch(`http://localhost:3000/students/find/${ra}`)
-    .then((response) => {
-      return response.json()
-    })
-    .then((data) => {
-      const studentForm = $("#studentForm");
+	$("#studentForm").submit(function (event) {
+		event.preventDefault();
 
-      studentForm.find("#name").val(data.nome);
-      studentForm.find("#email").val(data.email);
-      studentForm.find("#cpf").val(data.cpf);
-      studentForm.find("#ra").val(data.ra);
+		const body = {
+			name: $(this).find("#name").val(),
+			ra: $(this).find("#ra").val(),
+			cpf: $(this).find("#cpf").val(),
+			email: event.target.email.value,
+		};
 
-      $(".loader").hide("fast");
-      $(".content-page").show("slow")
-    });
-  } else {
+		fetch("http://localhost:3000/students/newstudent", {
+			method: "POST",
+			body: JSON.stringify(body),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				document.location.href = "studentsList.html";
+			});
+	});
+});
 
-    alert("Nenhum usuário informado");
-  }
+function fetchStudentsManager(ra) {
+	fetch(`http://localhost:3000/students/find/${ra}`)
+		.then((response) => {
+			return response.json();
+		})
+		.then((data) => {
+			const studentForm = $("#studentForm");
+
+			studentForm.find("#name").val(data.nome);
+			studentForm.find("#email").val(data.email);
+			studentForm.find("#cpf").val(data.cpf);
+			studentForm.find("#ra").val(data.ra);
+
+			$(".loader").hide("fast");
+			$(".content-page").show("slow");
+		});
 }
