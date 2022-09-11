@@ -1,10 +1,6 @@
 $(document).ready(() => {
-	fetchStudentsManager();
-	const urlSearch = new URLSearchParams(window.location.search);
-	const ra = urlSearch.get("ra");
-
-	if (ra) {
-		fetchStudentsManager(ra);
+	if (isEditingStudent()) {
+		fetchStudentsManager();
 	} else {
 		$(".loader").hide("fast");
 		$(".content-page").show("slow");
@@ -20,24 +16,44 @@ $(document).ready(() => {
 			email: event.target.email.value,
 		};
 
-		fetch("http://localhost:3000/students/newstudent", {
-			method: "POST",
-			body: JSON.stringify(body),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((response) => {
-				return response.json();
+		if (isEditingStudent()) {
+			fetch(
+				`http://localhost:3000/students/editstudent/${getRAfromUrl()}`,
+				{
+					method: "PUT",
+					body: JSON.stringify(body),
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			)
+				.then((response) => {
+					return response.json();
+				})
+				.then((data) => {
+					alert(data.message);
+					document.location.href = "studentsList.html";
+				});
+		} else {
+			fetch("http://localhost:3000/students/newstudent", {
+				method: "POST",
+				body: JSON.stringify(body),
+				headers: {
+					"Content-Type": "application/json",
+				},
 			})
-			.then((data) => {
-				document.location.href = "studentsList.html";
-			});
+				.then((response) => {
+					return response.json();
+				})
+				.then((data) => {
+					document.location.href = "studentsList.html";
+				});
+		}
 	});
 });
 
-function fetchStudentsManager(ra) {
-	fetch(`http://localhost:3000/students/find/${ra}`)
+function fetchStudentsManager() {
+	fetch(`http://localhost:3000/students/find/${getRAfromUrl()}`)
 		.then((response) => {
 			return response.json();
 		})
@@ -52,4 +68,14 @@ function fetchStudentsManager(ra) {
 			$(".loader").hide("fast");
 			$(".content-page").show("slow");
 		});
+}
+
+function isEditingStudent() {
+	const urlSearch = new URLSearchParams(window.location.search);
+	return urlSearch.has("ra");
+}
+
+function getRAfromUrl() {
+	const urlSearch = new URLSearchParams(window.location.search);
+	return urlSearch.get("ra");
 }
