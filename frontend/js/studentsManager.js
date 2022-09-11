@@ -16,39 +16,31 @@ $(document).ready(() => {
 			email: event.target.email.value,
 		};
 
+		let methodEndPoint;
+		let urlEndPoint;
+
 		if (isEditingStudent()) {
-			fetch(
-				`http://localhost:3000/students/editstudent/${getRAfromUrl()}`,
-				{
-					method: "PUT",
-					body: JSON.stringify(body),
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			)
-				.then((response) => {
-					return response.json();
-				})
-				.then((data) => {
-					alert(data.message);
-					document.location.href = "studentsList.html";
-				});
+			methodEndPoint = "PUT";
+			urlEndPoint = `http://localhost:3000/students/editstudent/${getRAfromUrl()}`;
 		} else {
-			fetch("http://localhost:3000/students/newstudent", {
-				method: "POST",
-				body: JSON.stringify(body),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			})
-				.then((response) => {
-					return response.json();
-				})
-				.then((data) => {
-					document.location.href = "studentsList.html";
-				});
+			methodEndPoint = "POST";
+			urlEndPoint = "http://localhost:3000/students/newstudent";
 		}
+
+		fetch(urlEndPoint, {
+			method: methodEndPoint,
+			body: JSON.stringify(body),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				alert(data.message);
+				document.location.href = "studentsList.html";
+			});
 	});
 });
 
