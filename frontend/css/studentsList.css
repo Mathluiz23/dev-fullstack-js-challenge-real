@@ -1,32 +1,28 @@
 .content-page .top-actions {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .content-page .top-actions .form-search {
-
 }
 
 .content-page .table-list {
-  width: 100%;
-  margin-top: 20px;
-  text-align: center;
-  border-collapse: collapse;
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+	border-collapse: collapse;
 }
 
-.content-page .table-list thead{
-  height: 50px;
-  background-color: skyblue;
+.content-page .table-list thead {
+	height: 50px;
+	background-color: skyblue;
 }
-
-
 
 .content-page .table-list tbody tr {
-  height: 40px;
-
+	height: 40px;
 }
 
 .content-page .table-list tbody tr:nth-child(even) {
-  background-color: #00000020;
+	background-color: #00000020;
 }
