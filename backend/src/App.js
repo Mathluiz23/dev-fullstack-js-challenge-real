@@ -1,15 +1,16 @@
-const express = require('express');
-let database = require('./database');
-const cors = require('cors');
+const express = require("express");
+let database = require("./database");
+const cors = require("cors");
+const knex = require("knex");
 console.log(database);
-
+const knexConfigFile = require("../knexfile");
 const app = express();
 
 app.use(cors());
-
+app.database = knex(knexConfigFile.test);
 app.use(express.json());
 
-app.get('/students/list/:searchQuery?', (req, res) => {
+app.get("/students/list/:searchQuery?", (req, res) => {
 	let result = database;
 	let search = req.params.searchQuery;
 
@@ -24,13 +25,17 @@ app.get('/students/list/:searchQuery?', (req, res) => {
 			);
 		});
 	}
-	setTimeout(() => {
-		res.send(result);
-	}, 1500);
-	// after 2 seconds get a database, simulation bd request
+
+	return app
+		.database("students")
+		.select()
+		.then((data) => {
+			console.log(data);
+			res.send(data);
+		});
 });
 
-app.get('/students/find/:ra', (req, res) => {
+app.get("/students/find/:ra", (req, res) => {
 	const studentsFound = database.find((student) => {
 		return student.ra === req.params.ra;
 	});
@@ -40,7 +45,7 @@ app.get('/students/find/:ra', (req, res) => {
 	}, 1500);
 });
 
-app.put('/students/editstudent/:ra', (req, res) => {
+app.put("/students/editstudent/:ra", (req, res) => {
 	database = database.filter((student) => {
 		return student.ra !== req.params.ra;
 	});
@@ -56,7 +61,7 @@ app.put('/students/editstudent/:ra', (req, res) => {
 	});
 });
 
-app.delete('/students/delete/:ra', (req, res) => {
+app.delete("/students/delete/:ra", (req, res) => {
 	database = database.filter((student) => {
 		return student.ra !== req.params.ra;
 	});
@@ -66,7 +71,7 @@ app.delete('/students/delete/:ra', (req, res) => {
 	});
 });
 
-app.post('/students/newstudent', (req, res) => {
+app.post("/students/newstudent", (req, res) => {
 	console.log(req.body);
 	database.push({
 		nome: req.body.name,
@@ -81,6 +86,6 @@ app.post('/students/newstudent', (req, res) => {
 });
 
 app.listen(3000);
-console.log('Server is running...');
+console.log("Server is running...");
 
 module.exports = app;
