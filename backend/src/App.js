@@ -36,29 +36,54 @@ app.get("/students/list/:searchQuery?", (req, res) => {
 });
 
 app.get("/students/find/:ra", (req, res) => {
-	const studentsFound = database.find((student) => {
-		return student.ra === req.params.ra;
-	});
-
-	setTimeout(() => {
-		res.send(studentsFound);
-	}, 1500);
+	return app
+		.database("students")
+		.select()
+		.where({ ra: req.params.ra })
+		.first()
+		.then((response) => {
+			console.log(response);
+			res.send(response);
+		});
 });
 
-app.put("/students/editstudent/:ra", (req, res) => {
-	database = database.filter((student) => {
-		return student.ra !== req.params.ra;
-	});
-	database.push({
-		nome: req.body.name,
-		ra: req.body.ra,
-		email: req.body.email,
-		cpf: req.body.cpf,
-	});
-	res.send({
-		result: true,
-		message: `O estudante ${req.body.name} foi atualizado com sucesso`,
-	});
+app.put("/students/editstudent/:ra", async (req, res) => {
+	const userFound = await app
+		.database("students")
+		.select()
+		.where({ ra: req.params.ra })
+		.first();
+
+	if (!userFound) {
+		return res.status(400).send({
+			result: false,
+			message: "O estudante informado não existe",
+		});
+	}
+
+	if (userFound) {
+		const studentUpdate = await app
+			.database("students")
+			.update({
+				email: req.body.email,
+				nome: req.body.name,
+			})
+			.where({
+				ra: req.params.ra,
+			});
+
+		if (studentUpdate) {
+			res.send({
+				result: true,
+				message: `O estudante ${req.body.name} foi atualizado com sucesso`,
+			});
+		} else {
+			res.status(500).send({
+				result: false,
+				message: "Não foi possível atualizar o estudante",
+			});
+		}
+	}
 });
 
 app.delete("/students/delete/:ra", (req, res) => {
