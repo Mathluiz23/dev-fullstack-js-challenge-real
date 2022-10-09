@@ -15,7 +15,6 @@ module.exports = class studentController {
 		}
 
 		return query.select().then((data) => {
-			console.log(data);
 			res.send(data);
 		});
 	};
@@ -32,61 +31,53 @@ module.exports = class studentController {
 			});
 	};
 
-	createAction = async (req, res) => {
-		if (req.body.name == "") {
-			return res.status(400).send({
-				result: false,
-				message: "O nome é um campo obrigatório",
-			});
+	isCreateDataValid = async (data) => {
+		if (data.name == "") {
+			return "O nome é um campo obrigatório";
 		}
 
-		if (req.body.email == "") {
-			return res.status(400).send({
-				result: false,
-				message: "O email é um campo obrigatório",
-			});
+		if (data.email == "") {
+			return "O email é um campo obrigatório";
 		}
 
-		if (req.body.cpf == "") {
-			return res.status(400).send({
-				result: false,
-				message: "O CPF é um campo obrigatório",
-			});
+		if (data.cpf == "") {
+			return "O CPF é um campo obrigatório";
 		}
 
-		if (req.body.ra == "") {
-			return res.status(400).send({
-				result: false,
-				message: "O RA é um campo obrigatório",
-			});
+		if (data.ra == "") {
+			return "O RA é um campo obrigatório";
 		}
 
-		if (parseInt(req.body.ra) != req.body.ra) {
-			return res.status(400).send({
-				result: false,
-				message: "O RA deve ser um número",
-			});
+		if (parseInt(data.ra) != data.ra) {
+			return "O RA deve ser um número";
 		}
 
-		if (parseInt(req.body.cpf) != req.body.ra) {
-			return res.status(400).send({
-				result: false,
-				message: "O CPF deve ser um número",
-			});
+		if (parseInt(data.cpf) != data.cpf) {
+			return "O CPF deve ser somente números";
 		}
 
 		const userExist = await this.app
 			.database("students")
 			.select()
 			.where({
-				ra: req.body.ra,
+				ra: data.ra,
 			})
 			.first();
 
 		if (userExist) {
+			return "Usuário com RA já cadastrado";
+		}
+
+		return true;
+	};
+
+	createAction = async (req, res) => {
+		const dataValid = await this.isCreateDataValid(req.body);
+
+		if (dataValid != true) {
 			return res.status(400).send({
 				result: false,
-				message: "Usuário com RA já cadastrado",
+				message: dataValid,
 			});
 		}
 
@@ -102,7 +93,7 @@ module.exports = class studentController {
 				if (response) {
 					res.send({
 						result: true,
-						message: `Aluno ${req.body.name} foi cadastrado com sucesso`,
+						message: `Estudante cadastrado com sucesso`,
 					});
 				} else {
 					res.status(500).send({
@@ -113,18 +104,24 @@ module.exports = class studentController {
 			});
 	};
 
-	editAction = async (req, res) => {
-		if (req.body.name == "") {
-			return res.status(400).send({
-				result: false,
-				message: "O nome é um campo obrigatório",
-			});
+	isEditDataValid = async (data) => {
+		if (data.name == "") {
+			return "O nome é um campo obrigatório";
 		}
 
-		if (req.body.email == "") {
+		if (data.email == "") {
+			return "O email é um campo obrigatório";
+		}
+		return true;
+	};
+
+	editAction = async (req, res) => {
+		const isEditDataValid = await this.isEditDataValid(req.body);
+
+		if (isEditDataValid != true) {
 			return res.status(400).send({
 				result: false,
-				message: "O email é um campo obrigatório",
+				message: isEditDataValid,
 			});
 		}
 
@@ -177,7 +174,7 @@ module.exports = class studentController {
 				if (response) {
 					res.send({
 						result: true,
-						message: `O estudante ${req.params.ra} foi excluído com sucesso`,
+						message: `O estudante foi excluído com sucesso`,
 					});
 				} else {
 					res.send({
