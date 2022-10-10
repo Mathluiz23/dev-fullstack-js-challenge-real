@@ -1,6 +1,7 @@
 body {
 	display: flex;
 	margin: 0px;
+	background-color: rgb(240, 240, 240);
 }
 
 .padding-left-rigth-20 {
@@ -9,7 +10,8 @@ body {
 }
 
 .main-nav {
-	background-color: black;
+	background-color: rgb(240, 240, 240);
+	box-shadow: 2px 2px 5px black;
 	width: 250px;
 	height: 100vh;
 }
@@ -17,7 +19,7 @@ body {
 .main-nav header {
 	font-size: 20px;
 	font-weight: 600;
-	color: white;
+	color: black;
 	text-align: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -32,13 +34,13 @@ body {
 
 .main-nav .nav-links a.nav-item {
 	text-decoration: none;
-	color: white;
+	color: black;
 	padding: 5px;
 	display: block;
 }
 
 .main-nav .nav-links a.nav-item:hover {
-	background-color: rgb(11, 96, 146);
+	background-color: #3498db;
 	display: block;
 }
 
@@ -47,7 +49,13 @@ body {
 }
 
 .container .main-header {
-	background-color: #00000090;
+	background-color: rgb(0, 0, 0);
+	box-shadow: 2px 2px 5px black;
+	color: white;
+	font-size: 21px;
+	font-weight: 800;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -55,34 +63,33 @@ body {
 }
 
 .btn {
-	height: 40px;
-	padding-left: 20px;
-	padding-right: 20px;
-	font-size: 16px;
 	font-weight: bold;
+	font-size: 19px;
 	text-decoration: none;
-	color: black;
+	color: rgb(231, 231, 231);
 	border: 1px transparent;
-	background-color: rgb(6, 63, 234);
+	background-color: #3498db;
+	border-radius: 5px;
+	height: 40px;
+	width: 120px;
+	padding: 9px 20px 9px 20px;
 }
 
 .btn-2 {
-	padding-left: 20px;
-	padding-right: 20px;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 18px;
 	text-decoration: none;
-	color: black;
+	color: rgb(231, 231, 231);
 	border: 1px transparent;
-	background-color: rgb(6, 63, 234);
-	padding: 11px 20px 12px 20px;
+	background-color: #3498db;
+	border-radius: 5px;
+	height: 40px;
+	width: 120px;
 }
 
 .btn-dark {
 	display: flex;
-	height: 40px;
-	padding-left: 20px;
-	padding-right: 20px;
+	justify-content: center;
 	font-weight: bold;
 	text-decoration: none;
 	text-align: center;
@@ -90,14 +97,16 @@ body {
 	background-color: #3498db;
 	color: rgb(231, 231, 231);
 	border-radius: 5px;
+	height: 50px;
+	width: 150px;
 }
 
 .margin-left-10 {
-	margin-left: 10;
+	margin-left: 10px;
 }
 
 .margin-right-10 {
-	margin-right: 10;
+	margin-right: 10px;
 }
 
 /* Loading */
