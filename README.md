@@ -1,12 +1,10 @@
 # Teste real - Full Stack Web Developer
 
-O objetivo deste desafio é avaliar as competências técnicas dos candidatos a desenvolvedor Full Stack Web na Maior Plataforma de Educação do Brasil.
-
-Será solicitado o desenvolvimento de uma Aplicação que realize a Matrícula do Aluno na Turma de Programação Web da instituição EdTech. Regras e requisitos técnicos estão detalhadas neste documento.
+O objetivo deste desafio é desenvolver uma Aplicação que realize a Matrícula do Aluno na Turma de Programação Web da instituição EdTech. Regras e requisitos técnicos estão detalhadas neste documento.
 
 # Especificações Técnicas
 
-- **Front End:** [ReactJs](https://reactjs.org/) como framework de UI
+- **Front End:** Html, JQuery e JavaScript
 - **API:** Express e NodeJS
 - **Banco de Dados:** Postgress ou MySQL
 - **Idioma de escrita do código:** Inglês
@@ -15,7 +13,7 @@ Será solicitado o desenvolvimento de uma Aplicação que realize a Matrícula d
 
 ## Contextualização
 
-Considere que uma Instituição de Ensino Superior precisa de uma solução para cadastrar e gerenciar matrículas de usuários em turmas online. Para realizar a matrícula, é necessário que o cadastro de aluno tenha sido realizado.
+Considere que uma Instituição de Ensino precisa de uma solução para cadastrar e gerenciar matrículas de usuários em turmas online. Para realizar a matrícula, é necessário que o cadastro de aluno tenha sido realizado.
 
 O desafio consiste em criar uma aplicação para o cadastro de usuários conforme os critérios de aceitação.
 
@@ -130,14 +128,13 @@ Abaixo alguns mockoups de interface como um guia para a criação do front-end. 
 
 # Instruções de entrega
 
-1. Crie um fork do repositório no seu GitHub
-2. Faça o push do código desenvolvido no seu Github
-3. Inclua um arquivo chamado COMMENTS.md explicando
+1. Faça o push do código desenvolvido no seu Github
+2. Inclua um arquivo chamado COMMENTS.md explicando
 
 - Decisão da arquitetura utilizada
 - Lista de bibliotecas de terceiros utilizadas
 - O que você melhoraria se tivesse mais tempo
 - Quais requisitos obrigatórios que não foram entregues
 
-4. Informe ao recrutador quando concluir o desafio junto com o link do repositório
-5. Após revisão do projeto junto com a equipe de desevolvimento deixe seu repositório privado
+3. Informe ao recrutador quando concluir o desafio junto com o link do repositório
+4. Após revisão do projeto junto com a equipe de desevolvimento deixe seu repositório privado
